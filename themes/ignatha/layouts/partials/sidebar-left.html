@@ -1,0 +1,18 @@
+<div id="sidebar-wrapper" class="w-full">
+    <div class="wrapper-siderbar">
+        <h3># Categories</h3>
+        <ul>
+            {{ range .Site.Taxonomies.categories }}
+            <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+    <div class="wrapper-siderbar">
+        <h3># Tags</h3>
+        <ul>
+            {{ range .Site.Taxonomies.tags }}
+            <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }} <i>#{{ .Count }}</i> </a></li>
+            {{ end }}
+        </ul>
+    </div>
+</div>
