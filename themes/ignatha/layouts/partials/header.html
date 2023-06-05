@@ -1,0 +1,24 @@
+<nav class="fixed top-0 z-40 w-full px-4 py-4 tracking-wide bg-[#4934b2] shadow-md md:py-4 md:px-4 lg:px-4">
+  <div class="flex flex-wrap items-center justify-between max-w-[94rem] mx-auto">
+    <div class="flex items-center">
+      <a href="/" class="text-3xl tracking-wide">
+        {{ if .IsPage }}
+        <h2 class="text-opacity-100 text-white text-lg font-black">{{ .Site.Title }}</h2>
+        {{ else }}
+        <h1 class="text-opacity-100 text-white text-lg font-black">{{ .Site.Title }}</h1>
+        {{ end }}
+      </a>
+    </div>
+
+    <div class="lg:flex lg:items-center">
+      {{ with .Site.GetPage "page" "search" }}
+      <a href="{{ .Permalink }}" aria-label="Search" title="Search the article here"
+        class="rounded-full text-white hover:bg-opacity-80 focus:outline-none focus:ring-2">
+        <div class="w-5 h-5">
+          <i class="fa fa-search" aria-hidden="true"></i></div>
+      </a>
+      {{ end }}
+    </div>
+
+  </div>
+</nav>

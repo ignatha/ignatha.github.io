@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{- block "head" . }}{{- end }}
+    <meta charset="UTF-8">
+    {{- partial "head.html" . -}}
+    </head>
+    <body>
+            <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MBG9NKM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+            {{- partial "header.html" . -}}
+            <div id="content" class="w-full px-[1.5rem] pt-[7rem] pb-[4rem]">
+            {{- block "main" . }}{{- end }}
+            </div>
+            <div class="spacer-gray"></div>
+            {{- partial "footer.html" . -}}
+    </body>
+</html>

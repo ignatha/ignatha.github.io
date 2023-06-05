@@ -1,0 +1,48 @@
+{{ define "main" }}
+<div class="flex flex-col md:flex-row">
+
+    <div class="w-full md:w-[80%] px-0 md:px-12 md:order-2 order-1">
+        <div class="w-full m-auto px-0">
+            <header class="mb-8">
+                <h1 id="post-title" class="text-4xl font-extrabold mb-2">{{ .Title }}</h1>
+            </header>
+            <div id="content-wrap" class="font-normal leading-normal">
+                <div x-data="{ posts:[], keywords:'' }" x-effect="posts = await search(keywords)" class="mx-auto">
+                    <!-- Search form -->
+                    <div class="my-10">
+                        <input x-model="keywords" type="search"
+                            class="px-4 py-2 block w-full border-2 border-gray-600 rounded-lg text-black"
+                            placeholder="Ketik kata kunci di sini...">
+                    </div>
+                    
+                    <div>
+                        <div x-show="posts.length <= 0" class="bg-gray-50 w-full text-[#313033] p-3 m-2">
+                            Belum ada hasil...
+                        </div>
+                        <div x-show="posts.length > 0" class="w-full flex md:flex-row flex-col flex-wrap justify-start">
+                            <template x-for="post in posts" >
+                                <div class="bg-gray-50 md:w-[calc(_(_100%_/_3_)_-_1rem_)] w-full text-[#313033] p-3 m-2">
+                                    <div>
+                                        <a x-bind:href="post.url" x-text="post.title" class="text-lg font-black" ></a><br>
+                                        <small x-text="post.date" class="text-xs font-thin"></small><br>
+                                        <small x-text="post.content.substring(0, 300)" class="text-s font-normal text-justify"></small>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- sidebar-right -->
+    <div class="w-full md:w-[20%] order-3">
+        {{- partial "sidebar-right.html" . -}}
+    </div>
+</div>
+{{ end }}
+
+{{ define "head" }}
+<meta name="turbo-visit-control" content="reload">
+{{ end }}
