@@ -29,6 +29,32 @@ header {
     }
 }
 
+@media (min-width: 768px) {
+
+  .dot-hover:after{
+    content: "\A";
+    width: 20px;
+    height: 1px;
+    background: #FFF740;
+    display: none;
+    position: relative;
+    margin: auto;
+  }
+
+  .dot-hover:hover:after{
+    display: block;
+  }
+
+  .dot-hover.active:after{
+    display: block;
+  }
+
+  .dot-hover.active{
+    color: #FFF740 !important;
+  }
+  
+}
+
 
 #content-wrap {
 

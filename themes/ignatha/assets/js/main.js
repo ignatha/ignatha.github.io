@@ -1,6 +1,10 @@
 import Alpine from 'alpinejs/dist/module.cjs'
 import Glider from 'glider-js';
 
+import Scrollbar from 'smooth-scrollbar';
+import OverscrollPlugin from 'smooth-scrollbar/plugins/overscroll';
+import { ScrollbarPlugin } from 'smooth-scrollbar';
+
 window.Alpine = Alpine
 
 
@@ -12,6 +16,81 @@ window.addEventListener('DOMContentLoaded', function () {
     draggable: true,
     exactWidth : true,
   })
+
+
+  Scrollbar.use(OverscrollPlugin);
+
+class AnchorPlugin extends ScrollbarPlugin {
+    static pluginName = 'anchor';
+  
+    onHashChange = () => {
+      this.jumpToHash(window.location.hash);
+    };
+  
+    onClick = (event) => {
+      const { target } = event;
+  
+      if (target.tagName !== 'A') {
+        return;
+      }
+  
+      const hash = target.getAttribute('href');
+  
+      if (!hash || hash.charAt(0) !== '#') {
+        return;
+      }
+  
+      this.jumpToHash(hash);
+    };
+  
+    jumpToHash = (hash) => {
+      const { scrollbar } = this;
+  
+      if (!hash) {
+        return;
+      }    
+  
+      // reset scrollTop
+      scrollbar.containerEl.scrollTop = 0;
+  
+      scrollbar.scrollIntoView(document.querySelector(hash));
+    };
+  
+    onInit() {
+      this.jumpToHash(window.location.hash);
+  
+      window.addEventListener('hashchange', this.onHashChange);
+  
+      this.scrollbar.contentEl.addEventListener('click', this.onClick);
+    }
+  
+    onDestory() {
+      window.removeEventListener('hashchange', this.onHashChange);
+  
+      this.scrollbar.contentEl.removeEventListener('click', this.onClick);
+    }
+  }
+
+// usage
+Scrollbar.use(AnchorPlugin);
+
+var options = {
+    damping : 0.04,
+    renderByPixels : true,
+    thumbMinSize  : 8,
+    continuousScrolling : true,
+    plugins : {
+        overscroll: {
+            effect : 'bounce',
+            damping : 0.1,
+            maxOverscroll : 150,
+            glowColor : '#222a2d'
+        } | false,
+    }
+}
+
+Scrollbar.init(document.querySelector('#scroll-area'),options);
+
 
 })
 

@@ -1,24 +1,31 @@
-<nav class="fixed top-0 z-40 w-full px-4 py-4 tracking-wide bg-[#4934b2] shadow-md md:py-4 md:px-4 lg:px-4">
-  <div class="flex flex-wrap items-center justify-between max-w-[94rem] mx-auto">
-    <div class="flex items-center">
-      <a href="/" class="text-3xl tracking-wide">
-        {{ if .IsPage }}
-        <h2 class="text-opacity-100 text-white text-lg font-black">{{ .Site.Title }}</h2>
-        {{ else }}
-        <h1 class="text-opacity-100 text-white text-lg font-black">{{ .Site.Title }}</h1>
-        {{ end }}
-      </a>
+<div class="w-full flex justify-center bg-[#4934b2] h-auto md:h-[70px] align-middle self-center fixed top-0 z-10 mt-0 md:mt-4 font-noto">
+  <div class="w-full max-w-[1080px] py-4 md:py-0 text-white flex text-[20px] leading-[30px]">
+    <div x-data="{ open: false }" class="flex flex-col w-full px-4 md:items-center justify-between md:flex-row">
+      <div class="flex flex-row items-center justify-between">
+        <h1 class="m-0">
+          <a href="/" class="tracking-widestdark-mode:text-white text-xl font-bold focus:outline-none focus:shadow-outline">
+            Ignatha
+          </a>
+        </h1>
+        <button class="md:hidden rounded-lg focus:outline-none focus:bg-[#4934b2] active:bg-[#4934b2] focus:shadow-outline" @click="open = !open">
+          <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+            <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <div :class="{'flex': open, 'hidden': !open}" class="w-full bg-[#4934b2] flex-grow md:pb-0 hidden md:flex justify-between flex-col md:flex-row items-center">
+        <div class="w-full">
+          <ul class="flex flex-col md:flex-row justify-end">
+            <li class="px-4 h-8 mt-2 md:w-[120px] rounded-lg md:mt-0 text-center"><a class="tosm text-base hover:text-[#FFF740] font-normal dot-hover text-white" href="#about" >About</a></li>
+            <li class="px-4 h-8 mt-2 md:w-[120px] rounded-lg md:mt-0 text-center"><a class="tosm text-base hover:text-[#FFF740] font-normal dot-hover text-white" href="#education">Education</a></li>
+            <li class="px-4 h-8 mt-2 md:w-[120px] rounded-lg md:mt-0 text-center"><a class="tosm text-base hover:text-[#FFF740] font-normal dot-hover text-white" href="#interest" >Interest</a></li>
+            <li class="px-4 h-8 mt-2 md:w-[120px] rounded-lg md:mt-0 text-center"><a class="tosm text-base hover:text-[#FFF740] font-normal dot-hover text-white" href="#skills" >Skills</a></li>
+            <li class="px-4 h-8 mt-2 md:w-[120px] rounded-lg md:mt-0 text-center"><a class="tosm text-base hover:text-[#FFF740] font-normal dot-hover text-white" href="#portfolio" >Portfolio</a></li>
+            <li class="px-4 h-8 mt-2 md:w-[120px] rounded-lg md:mt-0 text-center"><a class="tosm text-base hover:text-[#FFF740] font-normal dot-hover text-white" href="#contact" >Contact</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-
-    <div class="lg:flex lg:items-center">
-      {{ with .Site.GetPage "page" "search" }}
-      <a href="{{ .Permalink }}" aria-label="Search" title="Search the article here"
-        class="rounded-full text-white hover:bg-opacity-80 focus:outline-none focus:ring-2">
-        <div class="w-5 h-5">
-          <i class="fa fa-search" aria-hidden="true"></i></div>
-      </a>
-      {{ end }}
-    </div>
-
   </div>
-</nav>
+</div>
