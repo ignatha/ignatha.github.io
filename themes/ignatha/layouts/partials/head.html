@@ -6,6 +6,7 @@
 {{ $sass := resources.Get "css/main.scss" | resources.ToCSS }}
 {{ $style := $sass | resources.PostCSS | resources.Minify  }}
 {{ $st := (printf "%s?v=%s" $style.Permalink $random ) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
 
 <link rel="stylesheet" href="{{  $st  }}">
 
@@ -13,71 +14,4 @@
 {{ $j := (printf "%s?v=%s" $js.Permalink $random )  }}
 
 <script src="{{ $j }}"></script>
-
-
-  <!-- HTML Meta Tags -->
-{{ if .IsPage }}
-
-<title>{{ .Site.Title }} - {{ .Title }}</title>
-<meta property="og:title" content="{{ .Site.Title }} - {{ .Title }}">
-<meta name="twitter:title" content="{{ .Site.Title }} - {{ .Title }}">
-
-{{ else }}
-
-<title>{{ .Title }}</title>
-<meta property="og:title" content="{{ .Title }}">
-<meta name="twitter:title" content="{{ .Title }}">
-
-{{ end }}
-
-<link rel="canonical" href="{{ .Permalink }}">
-
-{{ if isset .Params "description" -}}
-<meta name="description" content="{{- .Description -}}" />
-<meta property="og:description" content="{{- .Description -}}">
-<meta name="twitter:description" content="{{- .Description -}}">
-
-
-{{ else }}
-<meta name="description" content="Ignatha blogs merupakan blog pribadi yang memberikan informasi seputar teknologi informatika dan komputer" />
-<meta property="og:description" content="Ignatha blogs merupakan blog pribadi yang memberikan informasi seputar teknologi informatika dan komputer">
-<meta name="twitter:description" content="Ignatha blogs merupakan blog pribadi yang memberikan informasi seputar teknologi informatika dan komputer">
-{{ end }}
-
-
-  <!-- Facebook Meta Tags -->
-  <meta property="og:locale" content="in_ID" />
-  <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:type" content="website">
-  
-
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="twitter:domain" content="ignatha.com">
-  <meta property="twitter:url" content="{{ .Permalink }}">
-
-  {{ if isset .Params "images" -}}
-        {{ range .Params.images }}
-            {{ $image := resources.Get . }}
-            {{ $image := $image.Resize "400x" }}
-            <meta name="og:image" content="{{ $image.Permalink }}" />
-            <meta name="twitter:image" content="{{ $image.Permalink }}">
-            <meta name="og:image:width" content="400" />
-            <meta name="og:image:height" content="400" />
-        {{end}}
-    {{ end }}
-
-<meta property="article:author" content="https://facebook.com/prabowo.id" />
-<meta name="author" content="ignatha" />
-<meta name="twitter:label1" content="Written by" />
-<meta name="twitter:data1" content="ignatha" />
-
-{{- partial "schema.html" . -}}
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MBG9NKM');</script>
-    <!-- End Google Tag Manager -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
